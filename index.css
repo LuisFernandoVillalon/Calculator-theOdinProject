@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.btn-container {
+    display: flex;
+    flex-direction: row;
+}
+.digit-container {
+    display: inline-grid;
+    grid-template-columns: 50px 50px 50px;
+}
+.btn {
+    background-color: lightgreen;
+    font-size: 25px;
+    border-radius: 5px;
+    border-width: 3px;
+    border-color: rgb(0, 0, 0);
+    cursor: pointer;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.operator-container {
+    display: inline-grid;
+    grid-template-columns: 50px;
+    margin-left: 10px;
+}
+.display {
+    height: 75px;
+    width: 100%;
+    background-color: rgb(65, 0, 112);
+}
+#digit {
+    color: white;
+}

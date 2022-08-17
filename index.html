@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>On-Screen Calculator</title>
+</head>
+<body>
+<div class="display">
+    <div id="digit">0</div>
+</div>
+<div class="btn-container">
+  <div class="digit-container">
+        <button class="btn" id="one"  onclick="assignOne(1)">1</button>
+        <button class="btn" id="two"  onclick="assignOne(2)">2</button>
+        <button class="btn" id="three"  onclick="assignOne(3)">3</button>
+        <button class="btn" id="four"  onclick="assignOne(4)">4</button>
+        <button class="btn" id="five"  onclick="assignOne(5)">5</button>
+        <button class="btn" id="six"  onclick="assignOne(6)">6</button>
+        <button class="btn" id="seven"  onclick="assignOne(7)">7</button>
+        <button class="btn" id="eight"  onclick="assignOne(8)">8</button>
+        <button class="btn" id="nine"  onclick="assignOne(9)">9</button>
+        <button class="btn" id="zero"  onclick="assignOne(0)">0</button>
+  </div>
+
+  <div class="operator-container">
+    <button class="btn" onclick = "assignOp('+')" >+</button>
+    <button class="btn" onclick = "assignOp('-')" >-</button>
+    <button class="btn" onclick = "assignOp('*')" >*</button>
+    <button class="btn" onclick = "assignOp('/')" >/</button>
+    <button class="btn" onclick = "assignAns()" >=</button>
+    <button class="btn" onclick = "assignClr()" >clr</button>
+  </div>
+
+</div>
+<script src="index.js" ></script>
+</body>
+</html>
