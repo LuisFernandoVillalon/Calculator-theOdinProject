@@ -1,111 +1,96 @@
-let ans = 0;
-let value = "";
-let totalValue = [];
-let NumInt = 0;
-let operator = "";
-let values = {firstValue: 0, secondValue: 0, thirdValue: 0};
+function add (a,b) {
+    return a + b;
+}
+function subtract (a,b) {
+    return a - b;
+}
+function multiply (a,b) {
+    return a * b;
+}
+function divide (a,b) {
+    if (b == 0) {
+        console.log("hi");
+        valueDisplay = [];
+        topValueDisplay = [];
+        values.first = 0;
+        values.second = 0; 
+        ops.first = "";
+        return  "ERROR! CANNOT DIVIDE BY 0!";
+    }
+    return a / b;
+}
+function operate (operator,num1,num2) {
+    if (operator == "+") {
+        return add(num1,num2)
+    } else if (operator == "-") {
+        return subtract(num1,num2);
+    } else if (operator == "*") {
+        return multiply(num1,num2);
+    } else if (operator == "/") {
+        return divide(num1,num2);
+    }
+}
 
-let screenValue = document.getElementById('digit');
- 
-function assignOne(value) {    
-    totalValue.push(value);
-    Num = totalValue.join('');
-    NumInt = Number(Num);
-    screenValue.textContent = NumInt;
-}
-function assignOp (op) {
-    if ( op == '+') {
-        storeFirstValue(NumInt);
-        screenValue.textContent = values.firstValue;
-        operator = "add";
-        totalValue = []; 
-    } else if ( op == '-') {
-        storeFirstValue(NumInt);
-        operator = "subtract";
-        totalValue = []; 
-    } else if ( op == '*') {
-        storeFirstValue(NumInt);
-        operator = "multiply";
-        totalValue = [];  
-    } else if ( op == '/') {
-        storeFirstValue(NumInt);
-        operator = "divide";
-        totalValue = []; 
-    }
-}
-function storeFirstValue (value) {
-    if (values.thirdValue) {
-        values.firstValue = values.thirdValue;
-    } else {
-    values.firstValue = value;
-    }
-}
-function assignAns() {
-    console.log(values.firstValue);
-    storeSecondValue(NumInt);
-    console.log(values.secondValue);
-    operate(operator, values.firstValue, values.secondValue)
-}
-function storeSecondValue(value) {
-    values.secondValue = value;
-}
-function operate(operator, a, b) {
-    if (operator == "add") {
-        return add(a,b);
-    } else if (operator == "subtract") {
-        return subtract(a,b);
-    } else if (operator == "multiply") {
-        return multiply(a,b);
-    } else if (operator == "divide") {
-        return divide(a,b);
-    }
-}
-function assignClr () { 
-    storeThirdValue(0);
-    storeFirstValue(0);
-    storeSecondValue(0);
-    NumInt = 0;
-    totalValue = [];
-    console.log(values.firstValue);
-    console.log(values.secondValue);
-    screenValue.textContent = 0;
-}
-function add(a,b) {
-    let A = Number(a);
-    let B = Number(b);
-    ans = A + B;
-    screenValue.textContent = ans;
-    storeThirdValue(ans);
-    console.log(ans);
-    return ans;
-}
-function subtract(a,b) {
-    let A = Number(a);
-    let B = Number(b);
-    ans = A - B;
-    screenValue.textContent = ans;
-    storeThirdValue(ans);
-    console.log(ans);
-    return ans;
-}
-function multiply(a,b) {
-    let A = Number(a);
-    let B = Number(b);
-    ans = A * B;
-    screenValue.textContent = ans;
-    storeThirdValue(ans);
-    console.log(ans);
-    return ans;
-}
-function divide(a,b) {
-    let A = Number(a);
-    let B = Number(b);
-    ans = A / B;
-    screenValue.textContent = ans;
-    storeThirdValue(ans);
-    console.log(ans);
-    return ans;
-}
-function storeThirdValue(value) {
-    values.thirdValue = value;
-}
+let valueDisplay = [];
+let topValueDisplay = [];
+const numBtn = document.querySelectorAll('.numBtn');
+const numBtnIndv = document.querySelector('.numBtn');
+const clrBtn = document.querySelector('.clrBtn');
+const equalBtn = document.querySelector('.equalTo');
+const opBtn = document.querySelectorAll('.opBtn');
+const opBtnIndv = document.querySelector('.opBtn');
+const bottomScreen = document.querySelector('#bottomScreen');
+const topScreen = document.querySelector('#topScreen');
+const values = {first: 0, second: 0};
+const ops = {first: 0, second: 0};
+
+numBtn.forEach((numBtnIndv) => {
+    numBtnIndv.addEventListener('click', () => {
+        valueDisplay.push(numBtnIndv.id);
+        topValueDisplay.push(numBtnIndv.id);
+        tempBot = valueDisplay.join('');
+        values.second = Number(tempBot);
+        bottomScreen.textContent = tempBot;
+    });
+
+});
+
+opBtn.forEach((opBtnIndv) => {
+     opBtnIndv.addEventListener('click', () => {
+            if (values.first) {
+                ans = operate(ops.first,values.first,values.second);
+                values.first = ans;
+                tempString = ans.toString();
+                valScreen = tempString + opBtnIndv.id;
+                topScreen.textContent = valScreen;
+                bottomScreen.textContent = ans;
+                ops.first = opBtnIndv.id;
+                valueDisplay = [];
+            } else {
+                values.first = values.second;
+                topValueDisplay.push(opBtnIndv.id);
+                tempTop = topValueDisplay.join('');
+                ops.first = opBtnIndv.id;
+                topScreen.textContent = tempTop;
+                valueDisplay = [];
+            }
+    });
+});
+
+equalBtn.addEventListener('click', () => {
+        answer = operate(ops.first,values.first,values.second);
+        console.log(answer);
+        answerScreen = values.first + ops.first + values.second + "=";
+        topScreen.textContent = answerScreen;
+        bottomScreen.textContent = answer;
+});
+
+clrBtn.addEventListener('click', () => {
+    valueDisplay = [];
+    topValueDisplay = [];
+    values.first = 0;
+    values.second = 0; 
+    ops.first = "";
+    topScreen.textContent = "";
+    bottomScreen.textContent = 0;
+});
